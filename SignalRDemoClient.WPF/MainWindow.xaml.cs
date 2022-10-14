@@ -11,6 +11,7 @@ namespace SignalRDemoClient.WPF;
 public partial class MainWindow : Window
 {
     HubConnection hubConnection;
+    HubConnection counterConnection;
 
     public MainWindow()
     {
@@ -19,6 +20,12 @@ public partial class MainWindow : Window
         // Builds the connection
         hubConnection = new HubConnectionBuilder()
             .WithUrl("https://localhost:7294/chathub")
+            .WithAutomaticReconnect()
+            .Build();
+
+        // Builds the connection
+        counterConnection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7294/counterhub")
             .WithAutomaticReconnect()
             .Build();
 
@@ -84,6 +91,31 @@ public partial class MainWindow : Window
         {
             await hubConnection.InvokeAsync(
                 "SendMessage", "WPF Client", messageInput.Text);
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message);
+        }
+    }
+
+    private async void openCounter_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await counterConnection.StartAsync();
+            openCounter.IsEnabled = false;
+        }
+        catch (Exception ex)
+        {
+            messages.Items.Add(ex.Message);
+        }
+    }
+
+    private async void incrementCounter_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            await counterConnection.InvokeAsync("AddToTotal", "WPF Client", 1);
         }
         catch (Exception ex)
         {

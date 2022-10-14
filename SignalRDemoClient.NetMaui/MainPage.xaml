@@ -36,6 +36,25 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+
+        <VerticalStackLayout HorizontalOptions="Center" Grid.Row="3">
+            
+            <Button 
+                x:Name="openCounter" 
+                Text="Open Counter" 
+                Padding="20,10" 
+                Margin="20" 
+                Clicked="openCounter_Clicked"/>
+
+            <Button 
+                x:Name="incrementCounter" 
+                Text="Increment Count" 
+                Padding="20,10" 
+                Margin="20" 
+                Clicked="incrementCounter_Clicked"/>
+
+        </VerticalStackLayout>
+        
     </Grid>
 
 </ContentPage>

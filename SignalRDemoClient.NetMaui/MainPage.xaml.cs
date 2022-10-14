@@ -7,14 +7,22 @@ namespace SignalRDemoClient.NetMaui;
 public partial class MainPage : ContentPage
 {
     HubConnection hubConnection;
+    HubConnection counterConnection;
     public ObservableCollection<MessageModel> MessageList { get; } = new();
 
     public MainPage()
     {
         InitializeComponent();
+
         messages.ItemsSource = MessageList;
         hubConnection = new HubConnectionBuilder()
             .WithUrl("https://localhost:7294/chathub")
+            .WithAutomaticReconnect()
+            .Build();
+
+        // Builds the connection
+        counterConnection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7294/counterhub")
             .WithAutomaticReconnect()
             .Build();
 
@@ -71,6 +79,31 @@ public partial class MainPage : ContentPage
             MessageList.Add(new MessageModel { MessageText = "Connection Started" });
             openConnection.IsEnabled = false;
             sendMessage.IsEnabled = true;
+        }
+        catch (Exception ex)
+        {
+            MessageList.Add(new MessageModel { MessageText = ex.Message });
+        }
+    }
+
+    private async void openCounter_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            await counterConnection.StartAsync();
+            openCounter.IsEnabled = false;
+        }
+        catch (Exception ex)
+        {
+            MessageList.Add(new MessageModel { MessageText = ex.Message });
+        }
+    }
+
+    private async void incrementCounter_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            await counterConnection.InvokeAsync("AddToTotal", "WPF Client", 1);
         }
         catch (Exception ex)
         {
