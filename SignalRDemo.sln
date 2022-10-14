@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33006.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDemo.BlazorServer", "SignalRDemo.BlazorServer\SignalRDemo.BlazorServer.csproj", "{00D86624-4A7D-4AE5-AD6D-EB130193473A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDemoClient.NetMaui", "SignalRDemoClient.NetMaui\SignalRDemoClient.NetMaui.csproj", "{131A232E-A7D1-4482-A4A9-475F3A6AAADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDemoClient.WPF", "SignalRDemoClient.WPF\SignalRDemoClient.WPF.csproj", "{C57FFF8B-09FD-4224-ACB1-8ED5BC4D116B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00D86624-4A7D-4AE5-AD6D-EB130193473A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D86624-4A7D-4AE5-AD6D-EB130193473A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D86624-4A7D-4AE5-AD6D-EB130193473A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D86624-4A7D-4AE5-AD6D-EB130193473A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131A232E-A7D1-4482-A4A9-475F3A6AAADA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C57FFF8B-09FD-4224-ACB1-8ED5BC4D116B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57FFF8B-09FD-4224-ACB1-8ED5BC4D116B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57FFF8B-09FD-4224-ACB1-8ED5BC4D116B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57FFF8B-09FD-4224-ACB1-8ED5BC4D116B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2688ED30-9F70-4EBF-9B0E-65995900E866}
+	EndGlobalSection
+EndGlobal

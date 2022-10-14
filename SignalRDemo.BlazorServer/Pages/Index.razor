@@ -1,0 +1,72 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager navManager
+@implements IAsyncDisposable
+
+<div class="form-group">
+    <label>
+        User: <input type="text" @bind="userInput"/>
+    </label>
+</div>
+
+<div class="form-group">
+    <label>
+        Message: <input type="text" @bind="messageInput" />
+    </label>
+</div>
+<button @onclick="Send" disabled="@(!IsConnected)">Send</button>
+
+<hr />
+
+<ul>
+    @foreach(string message in messages)
+    {
+        <li>@message</li>
+    }
+</ul>
+
+@code {
+    private HubConnection? hubConnection;
+    private List<string> messages = new();
+    private string? userInput;
+    private string? messageInput;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Builds the connection
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(navManager.ToAbsoluteUri("/chathub"))
+            .WithAutomaticReconnect()
+            .Build();
+
+        // "ReceiveMessage" is the event indicator used by the server for identifying messages
+        hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+        {
+            var formattedMessage = $"{user}: {message}";
+            messages.Add(formattedMessage);
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    private async void Send()
+    {
+        if (hubConnection is not null)
+        {
+            // "SendMessage" is the name of the method used by the server for sending messges
+            await hubConnection.SendAsync("SendMessage", "Blazor Client", userInput, messageInput);
+        }
+    }
+
+    private bool IsConnected => 
+        hubConnection?.State == HubConnectionState.Connected;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}
